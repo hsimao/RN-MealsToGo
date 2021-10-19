@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, Image, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import { Card } from 'react-native-paper';
+import { Spacer } from '../../../components/spacer.component';
 import Star from '../../../../assets/star.svg';
 import Open from '../../../../assets/open.svg';
 
@@ -51,13 +52,11 @@ const Rating = styled(View)`
 
 const CloseText = styled(Text)`
   color: ${props => props.theme.colors.text.error};
-  margin-right: ${props => props.theme.space[2]};
 `;
 
 const IconImage = styled(Image)`
   width: 15px;
   height: 15px;
-  margin-left: ${props => props.theme.space[2]};
 `;
 
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
@@ -100,7 +99,12 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
             {isClosedTemporarily && (
               <CloseText variant="label">CLOSED TEMPORARILY</CloseText>
             )}
+
+            <Spacer position="left" size="medium" />
+
             {OpenIcon}
+
+            <Spacer position="left" size="medium" />
             <IconImage source={{ uri: icon }} />
           </SectionEnd>
         </Section>
