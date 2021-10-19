@@ -1,63 +1,21 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import styled from 'styled-components/native';
-import { Card } from 'react-native-paper';
 import { Spacer } from '../../../components/spacer.component';
+import { Text } from '../../../components/text.component';
 import Star from '../../../../assets/star.svg';
 import Open from '../../../../assets/open.svg';
 
+import {
+  RestaurantCard,
+  RestaurantCardCover,
+  Info,
+  Section,
+  SectionEnd,
+  Rating,
+  IconImage,
+} from './restaurant-info-card.styles';
+
 const isWeb = Platform.OS === 'web';
-
-const RestaurantCard = styled(Card)`
-  background-color: ${props => props.theme.colors.bg.primary};
-`;
-
-const RestaurantCardCover = styled(Card.Cover)`
-  padding: ${props => props.theme.space[3]};
-  background-color: ${props => props.theme.colors.bg.primary};
-`;
-
-const Address = styled.Text`
-  font-family: ${props => props.theme.fonts.body};
-  font-size: ${props => props.theme.fontSizes.caption};
-`;
-
-const Title = styled.Text`
-  font-family: ${props => props.theme.fonts.body};
-  font-size: ${props => props.theme.fontSizes.body};
-  color: ${props => props.theme.colors.ui.primary};
-`;
-
-const Info = styled.View`
-  padding: ${props => props.theme.space[3]};
-`;
-
-const Section = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
-
-const SectionEnd = styled.View`
-  flex: 1;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-`;
-
-const Rating = styled.View`
-  flex-direction: row;
-  padding-top: ${props => props.theme.space[2]};
-  padding-bottom: ${props => props.theme.space[2]};
-`;
-
-const CloseText = styled.Text`
-  color: ${props => props.theme.colors.text.error};
-`;
-
-const IconImage = styled.Image`
-  width: 15px;
-  height: 15px;
-`;
 
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
@@ -90,14 +48,14 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     <RestaurantCard elevation={5}>
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
-        <Title>{name}</Title>
+        <Text variant="label">{name}</Text>
 
         <Section>
           <Rating>{StarIconList}</Rating>
 
           <SectionEnd>
             {isClosedTemporarily && (
-              <CloseText variant="label">CLOSED TEMPORARILY</CloseText>
+              <Text variant="error">CLOSED TEMPORARILY</Text>
             )}
 
             <Spacer position="left" size="medium" />
@@ -109,7 +67,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
           </SectionEnd>
         </Section>
 
-        <Address>{address}</Address>
+        <Text variant="caption">{address}</Text>
       </Info>
     </RestaurantCard>
   );
