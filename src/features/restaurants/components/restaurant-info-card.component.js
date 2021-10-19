@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 import { Card } from 'react-native-paper';
 import { Spacer } from '../../../components/spacer.component';
@@ -17,22 +17,22 @@ const RestaurantCardCover = styled(Card.Cover)`
   background-color: ${props => props.theme.colors.bg.primary};
 `;
 
-const Address = styled(Text)`
+const Address = styled.Text`
   font-family: ${props => props.theme.fonts.body};
   font-size: ${props => props.theme.fontSizes.caption};
 `;
 
-const Title = styled(Text)`
+const Title = styled.Text`
   font-family: ${props => props.theme.fonts.body};
   font-size: ${props => props.theme.fontSizes.body};
   color: ${props => props.theme.colors.ui.primary};
 `;
 
-const Info = styled(View)`
+const Info = styled.View`
   padding: ${props => props.theme.space[3]};
 `;
 
-const Section = styled(View)`
+const Section = styled.View`
   flex-direction: row;
   align-items: center;
 `;
@@ -44,17 +44,17 @@ const SectionEnd = styled.View`
   align-items: center;
 `;
 
-const Rating = styled(View)`
+const Rating = styled.View`
   flex-direction: row;
   padding-top: ${props => props.theme.space[2]};
   padding-bottom: ${props => props.theme.space[2]};
 `;
 
-const CloseText = styled(Text)`
+const CloseText = styled.Text`
   color: ${props => props.theme.colors.text.error};
 `;
 
-const IconImage = styled(Image)`
+const IconImage = styled.Image`
   width: 15px;
   height: 15px;
 `;
