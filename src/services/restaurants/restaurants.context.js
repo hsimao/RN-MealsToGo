@@ -13,13 +13,9 @@ export const RestaurantsContextProvider = ({ children }) => {
     setTimeout(() => {
       fetchRestaurants()
         .then(restaurantsTransform)
-        .then(res => {
-          setRestaurants(res);
-        })
-        .catch(err => {
-          setError(err);
-        })
-        .finally(setIsLoading(false));
+        .then(res => setRestaurants(res))
+        .catch(err => setError(err))
+        .finally(() => setIsLoading(false));
     }, 2000);
   };
 
