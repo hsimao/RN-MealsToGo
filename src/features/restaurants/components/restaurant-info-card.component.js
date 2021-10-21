@@ -1,7 +1,7 @@
 import React from 'react';
-import { Platform } from 'react-native';
 import { Spacer } from '../../../components/spacer.component';
 import { Text } from '../../../components/text.component';
+import { SvgWrapper } from '../../../components/svg-wrapper.component';
 import Star from '../../../../assets/star.svg';
 import Open from '../../../../assets/open.svg';
 
@@ -15,8 +15,6 @@ import {
   IconImage,
 } from './restaurant-info-card.styles';
 
-const isWeb = Platform.OS === 'web';
-
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
     name = 'Some Restaurant',
@@ -26,23 +24,19 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = true,
+    placeId,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
 
-  const StarIconList = ratingArray.map((item, index) =>
-    isWeb ? (
-      <img key={index} src={Star} width={20} height={20} />
-    ) : (
-      <Star key={index} width={20} height={20} />
-    )
-  );
-
-  const OpenIcon = isWeb ? (
-    <img src={Open} width={20} height={20} />
-  ) : (
-    <Open width={20} height={20} />
-  );
+  const StarIconList = ratingArray.map((_, index) => (
+    <SvgWrapper
+      key={`star-${placeId}-${index}`}
+      Svg={Star}
+      width={20}
+      height={20}
+    />
+  ));
 
   return (
     <RestaurantCard elevation={5}>
@@ -60,7 +54,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
 
             <Spacer position="left" size="medium" />
 
-            {OpenIcon}
+            <SvgWrapper Svg={Open} width={20} height={20} />
 
             <Spacer position="left" size="medium" />
             <IconImage source={{ uri: icon }} />
