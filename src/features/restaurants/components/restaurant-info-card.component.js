@@ -2,6 +2,7 @@ import React from 'react';
 import { Spacer } from '../../../components/spacer.component';
 import { Text } from '../../../components/text.component';
 import { SvgWrapper } from '../../../components/svg-wrapper.component';
+import { Favourite } from '../../../components/favourite.component';
 import Star from '../../../../assets/star.svg';
 import Open from '../../../../assets/open.svg';
 
@@ -40,6 +41,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
 
   return (
     <RestaurantCard elevation={5}>
+      <Favourite restaurant={restaurant} />
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
         <Text variant="label">{name}</Text>

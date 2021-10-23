@@ -3,14 +3,14 @@ import React, { createContext, useState } from 'react';
 export const FavouritesContext = createContext();
 
 export const FavouritesContextProvider = ({ children }) => {
-  const [favourites, setFavourites] = useState({});
+  const [favourites, setFavourites] = useState([]);
 
   const addFavourites = restaurant => {
     setFavourites([...favourites, restaurant]);
   };
 
   const removeFavourite = restaurant => {
-    const withoutRemoveFavourites = restaurant.filter(
+    const withoutRemoveFavourites = favourites.filter(
       item => item.placeId !== restaurant.placeId
     );
     setFavourites(withoutRemoveFavourites);
