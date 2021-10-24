@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components/native';
 import { RestaurantsContextProvider } from './src/services/restaurants/restaurants.context';
 import { LocationContextProvider } from './src/services/location/location.context';
 import { FavouritesContextProvider } from './src/services/favourites/favourites.context';
+import './src/config/firebase';
 
 import {
   useFonts as useOswald,
