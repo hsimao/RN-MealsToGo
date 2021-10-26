@@ -30,3 +30,11 @@ export const AuthButton = styled(Button).attrs({
 })`
   padding: ${props => props.theme.space[2]};
 `;
+
+export const AnimationWrapper = styled.View`
+  width: 100%;
+  height: 30%;
+  position: absolute;
+  top: 30px;
+  padding: ${props => props.theme.space[2]};
+`;
