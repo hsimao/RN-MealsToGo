@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import { colors } from '../../../infrastructure/theme/colors';
-import { Button } from 'react-native-paper';
+import { Button, TextInput } from 'react-native-paper';
+import { Text } from '../../../components/text.component';
 
 export const AccountBackground = styled.ImageBackground.attrs({
   source: require('../../../../assets/home_bg.jpeg'),
@@ -24,7 +25,6 @@ export const AccountContainer = styled.View`
 `;
 
 export const AuthButton = styled(Button).attrs({
-  icon: 'lock-open-outline',
   mode: 'contained',
   color: colors.brand.primary,
 })`
@@ -37,4 +37,20 @@ export const AnimationWrapper = styled.View`
   position: absolute;
   top: 30px;
   padding: ${props => props.theme.space[2]};
+`;
+
+export const AuthInput = styled(TextInput)`
+  width: 300px;
+`;
+
+export const Title = styled(Text)`
+  font-size: 30px;
+`;
+
+export const ErrorContainer = styled.View`
+  max-width: 300px;
+  align-items: center;
+  align-self: center;
+  margin-top: ${props => props.theme.space[2]};
+  margin-bottom: ${props => props.theme.space[2]};
 `;

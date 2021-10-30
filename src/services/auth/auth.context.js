@@ -18,14 +18,21 @@ export const AuthContextProvider = ({ children }) => {
         }
       })
       .catch(error => {
-        console.log('error', error.message);
-        setError(error);
+        setError(error.message);
       })
       .finally(() => setIsLoading(false));
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, error, onLogin }}>
+    <AuthContext.Provider
+      value={{
+        isAuth: !!user,
+        user,
+        isLoading,
+        error,
+        onLogin,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

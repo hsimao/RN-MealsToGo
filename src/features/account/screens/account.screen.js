@@ -7,26 +7,34 @@ import {
   AccountContainer,
   AuthButton,
   AnimationWrapper,
+  Title,
 } from '../components/account.styles';
 
 export const AccountScreen = ({ navigation }) => {
   return (
     <AccountBackground>
       <AccountCover />
+      <Title>Meals To Go</Title>
       <AnimationWrapper>
-        <LottieView
+        {/* <LottieView
           autoPlay
           loop
           resizeMode="cover"
           source={require('../../../../assets/watermelon.json')}
-        />
+        /> */}
       </AnimationWrapper>
       <AccountContainer>
-        <AuthButton onPress={() => navigation.navigate('Login')}>
+        <AuthButton
+          icon="lock-open-outline"
+          onPress={() => navigation.navigate('Login')}
+        >
           Login
         </AuthButton>
         <Spacer size="large" />
-        <AuthButton onPress={() => navigation.navigate('Register')}>
+        <AuthButton
+          icon="email"
+          onPress={() => navigation.navigate('Register')}
+        >
           Register
         </AuthButton>
       </AccountContainer>
