@@ -26,6 +26,7 @@ export const AuthContextProvider = ({ children }) => {
       setError('Error: Passwords do not match');
       return;
     }
+    setIsLoading(true);
 
     register(email, password)
       .then(userCredential => {

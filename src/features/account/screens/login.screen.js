@@ -10,12 +10,13 @@ import {
   AuthInput,
   ErrorContainer,
   Title,
+  Loading,
 } from '../components/account.styles';
 
 export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { onLogin, error } = useContext(AuthContext);
+  const { onLogin, error, isLoading } = useContext(AuthContext);
 
   return (
     <AccountBackground>
@@ -46,13 +47,17 @@ export const LoginScreen = ({ navigation }) => {
           </ErrorContainer>
         )}
         <Spacer size="large">
-          <AuthButton
-            icon="lock-open-outline"
-            mode="contained"
-            onPress={() => onLogin(email, password)}
-          >
-            Login
-          </AuthButton>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <AuthButton
+              icon="lock-open-outline"
+              mode="contained"
+              onPress={() => onLogin(email, password)}
+            >
+              Login
+            </AuthButton>
+          )}
         </Spacer>
         <Spacer size="large">
           <AuthButton mode="contained" onPress={() => navigation.goBack()}>

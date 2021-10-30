@@ -10,6 +10,7 @@ import {
   AuthInput,
   ErrorContainer,
   Title,
+  Loading,
 } from '../components/account.styles';
 
 export const RegisterScreen = ({ navigation }) => {
@@ -17,7 +18,7 @@ export const RegisterScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [repeatedPassword, setRepeatedPassword] = useState('');
 
-  const { onRegister, error } = useContext(AuthContext);
+  const { onRegister, error, isLoading } = useContext(AuthContext);
 
   return (
     <AccountBackground>
@@ -58,13 +59,17 @@ export const RegisterScreen = ({ navigation }) => {
           </ErrorContainer>
         )}
         <Spacer size="large">
-          <AuthButton
-            icon="email"
-            mode="contained"
-            onPress={() => onRegister(email, password, repeatedPassword)}
-          >
-            Register
-          </AuthButton>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <AuthButton
+              icon="email"
+              mode="contained"
+              onPress={() => onRegister(email, password, repeatedPassword)}
+            >
+              Register
+            </AuthButton>
+          )}
         </Spacer>
         <Spacer size="large">
           <AuthButton mode="contained" onPress={() => navigation.goBack()}>

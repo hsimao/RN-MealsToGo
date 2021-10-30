@@ -1,6 +1,11 @@
 import styled from 'styled-components/native';
 import { colors } from '../../../infrastructure/theme/colors';
-import { Button, TextInput } from 'react-native-paper';
+import {
+  Button,
+  TextInput,
+  ActivityIndicator,
+  Colors,
+} from 'react-native-paper';
 import { Text } from '../../../components/text.component';
 
 export const AccountBackground = styled.ImageBackground.attrs({
@@ -54,3 +59,8 @@ export const ErrorContainer = styled.View`
   margin-top: ${props => props.theme.space[2]};
   margin-bottom: ${props => props.theme.space[2]};
 `;
+
+export const Loading = styled(ActivityIndicator).attrs({
+  animating: true,
+  color: Colors.blue300,
+})``;
