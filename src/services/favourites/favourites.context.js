@@ -1,24 +1,26 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AuthContext } from '../auth/auth.context';
 
 export const FavouritesContext = createContext();
 
 export const FavouritesContextProvider = ({ children }) => {
   const [favourites, setFavourites] = useState([]);
+  const { user } = useContext(AuthContext);
 
-  const saveFavourites = async value => {
+  const saveFavourites = async (value, uid) => {
     if (value && value.length) {
       try {
-        await AsyncStorage.setItem('@favourites', JSON.stringify(value));
+        await AsyncStorage.setItem(`@favourites-${uid}`, JSON.stringify(value));
       } catch (e) {
         console.log('saveFavourites error: ', e);
       }
     }
   };
 
-  const loadFavourites = async () => {
+  const loadFavourites = async uid => {
     try {
-      const value = await AsyncStorage.getItem('@favourites');
+      const value = await AsyncStorage.getItem(`@favourites-${uid}`);
       if (value !== null) {
         setFavourites(JSON.parse(value));
       }
@@ -40,12 +42,17 @@ export const FavouritesContextProvider = ({ children }) => {
 
   // 第一次掛載時先從本地裝置取得資料
   useEffect(() => {
-    loadFavourites();
-  }, []);
+    if (user && user.uid) {
+      console.log('user', user);
+      loadFavourites(user.uid);
+    }
+  }, [user]);
 
   useEffect(() => {
-    saveFavourites(favourites);
-  }, [favourites]);
+    if (user && user.uid && favourites.length) {
+      saveFavourites(favourites, user.uid);
+    }
+  }, [favourites, user]);
 
   return (
     <FavouritesContext.Provider
