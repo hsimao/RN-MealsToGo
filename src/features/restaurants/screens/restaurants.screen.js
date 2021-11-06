@@ -1,21 +1,13 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components/native';
-import { FlatList, TouchableOpacity } from 'react-native';
 import { ActivityIndicator, Colors } from 'react-native-paper';
-import { RestaurantInfoCard } from '../components/restaurant-info-card.component.js';
+import { RestaurantList } from '../components/restaurant-list.component';
 import { Search } from '../components/search.component.js';
-import { Spacer } from '../../../components/spacer.component';
 import { SafeArea } from '../../../components/safe-area.component';
 import { FavouritesBar } from '../../../components/favourites-bar.component';
 
 import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
 import { FavouritesContext } from '../../../services/favourites/favourites.context';
-
-const RestaurantList = styled(FlatList).attrs({
-  contentContainerStyle: {
-    padding: 16,
-  },
-})``;
 
 const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
@@ -52,25 +44,7 @@ export const RestaurantsScreen = ({ navigation }) => {
         />
       )}
 
-      <RestaurantList
-        data={restaurants}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('RestaurantDetail', {
-                  restaurant: item,
-                })
-              }
-            >
-              <Spacer position="bottom" size="large">
-                <RestaurantInfoCard restaurant={item} />
-              </Spacer>
-            </TouchableOpacity>
-          );
-        }}
-        keyExtractor={item => item.name}
-      />
+      <RestaurantList restaurants={restaurants} navigation={navigation} />
     </SafeArea>
   );
 };
