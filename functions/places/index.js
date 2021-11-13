@@ -1,6 +1,22 @@
 const functions = require('firebase-functions');
-const { mocks, addMockImage } = require('./mock');
+const { mocks, addMockImage, images } = require('./mock');
+
 const url = require('url');
+
+const addGoogleImage = restaurant => {
+  const ref = restaurant?.photos[0]?.photo_reference;
+  if (!ref) {
+    restaurant.photos = [images.mockImages[0]];
+    return restaurant;
+  }
+
+  restaurant.photos = [
+    `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${ref}&key=${
+      functions.config().google.mapkey
+    }`,
+  ];
+  return restaurant;
+};
 
 module.exports.placesRequest = (request, response, client) => {
   const { location, mock } = url.parse(request.url, true).query;
@@ -28,12 +44,13 @@ module.exports.placesRequest = (request, response, client) => {
       timeout: 1000,
     })
     .then(res => {
-      // NOTE: google map 圖片要另外處理, 這邊用假圖
+      // NOTE: google map 圖片要另外呼叫 api 會導致費用遽增, 這邊用假圖
       res.data.results = res.data.results.map(addMockImage);
       return response.json(res.data);
     })
     .catch(err => {
       response.status(400);
+      console.log('err', err);
       return response.send(err.response.data.error_message);
     });
 };
