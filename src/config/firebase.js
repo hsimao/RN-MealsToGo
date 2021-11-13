@@ -6,6 +6,8 @@ import {
   storageBucket,
   messagingSenderId,
   appId,
+  measurementId,
+  functionsApiUrl,
 } from '@env';
 
 const firebaseConfig = {
@@ -15,6 +17,11 @@ const firebaseConfig = {
   storageBucket,
   messagingSenderId,
   appId,
+  measurementId,
 };
 
 export const Firebase = initializeApp(firebaseConfig);
+
+const devApiUrl = 'http://localhost:5001/mealstogo-45a73/us-central1/';
+export const apiUrl =
+  process.env.NODE_ENV === 'development' ? devApiUrl : functionsApiUrl;

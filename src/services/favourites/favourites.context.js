@@ -43,7 +43,6 @@ export const FavouritesContextProvider = ({ children }) => {
   // 第一次掛載時先從本地裝置取得資料
   useEffect(() => {
     if (user && user.uid) {
-      console.log('user', user);
       loadFavourites(user.uid);
     }
   }, [user]);

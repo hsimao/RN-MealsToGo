@@ -1,6 +1,7 @@
 import { mocks, mockImages } from './mock';
 import camelize from 'camelize';
 import { Platform } from 'react-native';
+import { apiUrl } from '../../config/firebase';
 
 export const fetchRestaurants = location => {
   const isWeb = Platform.OS === 'web';
@@ -10,9 +11,9 @@ export const fetchRestaurants = location => {
 };
 
 const fetchRestaurantsFromFirebase = location => {
-  return fetch(
-    `http://localhost:5001/mealstogo-329909/us-central1/placesNearby?location=${location}`
-  ).then(res => res.json());
+  return fetch(`${apiUrl}placesNearby?location=${location}`).then(res =>
+    res.json()
+  );
 };
 
 export const fetchRestaurantsFromLocal = location => {
