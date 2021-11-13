@@ -4,6 +4,9 @@ const url = require('url');
 
 module.exports.geocodeRequest = (request, response, client) => {
   const { city, mock } = url.parse(request.url, true).query;
+  if (!city) {
+    response.send('missing the "city" parameter.');
+  }
 
   if (mock === 'true') {
     const location = city ? locationMock[city.toLowerCase()] : '';

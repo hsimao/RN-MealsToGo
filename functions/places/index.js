@@ -5,6 +5,10 @@ const url = require('url');
 module.exports.placesRequest = (request, response, client) => {
   const { location, mock } = url.parse(request.url, true).query;
 
+  if (!location) {
+    response.send('missing the "location" parameter.');
+  }
+
   if (mock === 'true') {
     const data = location ? mocks[location] : '';
     if (data) {
