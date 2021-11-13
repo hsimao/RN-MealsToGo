@@ -2,6 +2,7 @@ import camelize from 'camelize';
 import { location } from './location.mock';
 import { Platform } from 'react-native';
 import { apiUrl } from '../../config/firebase';
+import { isMock } from '@env';
 
 export const fetchLocation = searchTerm => {
   const isWeb = Platform.OS === 'web';
@@ -11,7 +12,9 @@ export const fetchLocation = searchTerm => {
 };
 
 const fetchLocationFromFirebase = searchTerm => {
-  return fetch(`${apiUrl}geocode?city=${searchTerm}`).then(res => res.json());
+  return fetch(`${apiUrl}geocode?city=${searchTerm}&mock=${isMock}`).then(res =>
+    res.json()
+  );
 };
 
 const fetchLocationFromLocal = searchTerm => {
