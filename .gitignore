@@ -16,3 +16,5 @@ web-build/
 
 */node_modules/**/*
 functions/*-debug.log
+ui-debug.log
+.runtimeconfig.json
