@@ -16,7 +16,10 @@ export const RestaurantsContextProvider = ({ children }) => {
     setTimeout(() => {
       fetchRestaurants(loc)
         .then(restaurantsTransform)
-        .then(res => setRestaurants(res))
+        .then(res => {
+          setError(null);
+          setRestaurants(res);
+        })
         .catch(err => setError(err))
         .finally(() => setIsLoading(false));
     }, 2000);
